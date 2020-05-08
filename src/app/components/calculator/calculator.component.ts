@@ -35,15 +35,37 @@ import { CALC_BUTTONS } from './calc-buttons';
           </ng-container>
         </div>
         <div fxFlex="30" fxFlex.lt-md="20">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="space-between center"
-            class="calc-row"
-          >
-            <div class="calc-button">
-              <button fxFlex type="button" mat-raised-button id=""></button>
+          <div fxLayout="row" fxLayoutAlign="center" class="calc-row">
+            <div class="calc-action">
+              <button fxFlex type="button" mat-raised-button id="multiply">
+                X
+              </button>
             </div>
-            <div></div>
+            <div class="calc-action">
+              <button fxFlex type="button" mat-raised-button id="divide">
+                /
+              </button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center" class="calc-row">
+            <div class="calc-action">
+              <button fxFlex type="button" mat-raised-button id="add">
+                +
+              </button>
+            </div>
+            <div class="calc-action">
+              <button fxFlex type="button" mat-raised-button id="subtract">
+                -
+              </button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center" style="height: 40vh">
+            <!-- TODO: add credits and settings -->
+            <div class="calc-action">
+              <button fxFlex type="button" mat-raised-button id="equals">
+                =
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -66,6 +88,18 @@ import { CALC_BUTTONS } from './calc-buttons';
         width: 33%;
         padding: 0.5rem;
         font-size: 2rem;
+      }
+    `,
+    `
+      .calc-action {
+        width: 100%;
+        padding: 0.5rem;
+      }
+    `,
+    `
+      .calc-submit {
+        width: 100%;
+        height: 100%;
       }
     `
   ],
