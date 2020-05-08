@@ -105,6 +105,10 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {}
         },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {}
+        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
