@@ -1,13 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CalcButton } from './calc-button';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CALC_BUTTONS } from './calc-buttons';
+import { CalculatorService } from './calculator.service';
 
 @Component({
   selector: 'calc-calculator',
   template: `
     <div fxFlexFill fxLayout="column" FxFlex>
-      <div class="calc-display" #calcDisplay id="display">
-        DISPLAY
+      <div
+        class="calc-display"
+        #calcDisplay
+        id="display"
+        fxLayoutAlign="end center"
+      >
+        {{ (displayValue$ | async) || 0 }}
       </div>
       <div fxLayout="row" style="height: 100%">
         <!-- number buttons -->
@@ -37,24 +43,48 @@ import { CALC_BUTTONS } from './calc-buttons';
         <div fxFlex="30" fxFlex.lt-md="20">
           <div fxLayout="row" fxLayoutAlign="center" class="calc-row">
             <div class="calc-action">
-              <button fxFlex type="button" mat-raised-button id="multiply">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="multiply"
+                (click)="times()"
+              >
                 X
               </button>
             </div>
             <div class="calc-action">
-              <button fxFlex type="button" mat-raised-button id="divide">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="divide"
+                (click)="divide()"
+              >
                 /
               </button>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="center" class="calc-row">
             <div class="calc-action">
-              <button fxFlex type="button" mat-raised-button id="add">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="add"
+                (click)="add()"
+              >
                 +
               </button>
             </div>
             <div class="calc-action">
-              <button fxFlex type="button" mat-raised-button id="subtract">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="subtract"
+                (click)="subtract()"
+              >
                 -
               </button>
             </div>
@@ -62,7 +92,13 @@ import { CALC_BUTTONS } from './calc-buttons';
           <div fxLayout="row" fxLayoutAlign="center" style="height: 40vh">
             <!-- TODO: add credits and settings -->
             <div class="calc-action">
-              <button fxFlex type="button" mat-raised-button id="equals">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="equals"
+                (click)="equals()"
+              >
                 =
               </button>
             </div>
@@ -75,6 +111,8 @@ import { CALC_BUTTONS } from './calc-buttons';
     `
       .calc-display {
         height: 30vh;
+        font-size: 24px;
+        padding: 24px;
       }
     `,
     `
@@ -107,11 +145,44 @@ import { CALC_BUTTONS } from './calc-buttons';
 })
 export class CalculatorComponent implements OnInit {
   public readonly calcButtons = CALC_BUTTONS;
-  constructor() {}
+  public displayValue$: Observable<string>;
+  constructor(private calculator: CalculatorService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayValue$ = this.calculator.displayValue$;
+  }
 
-  public enterNumber(num: number) {
-    console.log('hit', num);
+  public enterNumber(num: number | '.' | 'C') {
+    if (num === 'C') {
+      return this.clear();
+    }
+    if (num === '.') {
+      return this.calculator.enterDecimal();
+    }
+    this.calculator.enterNumber(num);
+  }
+
+  public clear() {
+    this.calculator.clear();
+  }
+
+  public equals() {
+    this.calculator.equals();
+  }
+
+  public times() {
+    this.calculator.times();
+  }
+
+  public divide() {
+    this.calculator.divide();
+  }
+
+  public add() {
+    this.calculator.add();
+  }
+
+  public subtract() {
+    this.calculator.subtract();
   }
 }
