@@ -1,5 +1,8 @@
 name: CI
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -19,3 +22,9 @@ jobs:
       - name: build
         run: npm run build -- --configuration=production
       # TODO: add deployment to gh-pages
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{github.event_name === 'release'}}
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          publish_dir: ./dist/fcc-calculator
