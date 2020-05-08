@@ -24,7 +24,7 @@ jobs:
       # TODO: add deployment to gh-pages
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{github.event_name === 'release'}}
+        if: ${{github.event_name}} === 'release'
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           publish_dir: ./dist/fcc-calculator
