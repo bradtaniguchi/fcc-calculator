@@ -103,6 +103,10 @@
           "options": {
             "browserTarget": "fcc-calculator:build"
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
