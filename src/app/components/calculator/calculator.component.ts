@@ -19,15 +19,15 @@ import { CALC_BUTTONS } from './calc-buttons';
               class="calc-row"
             >
               <ng-container *ngFor="let button of rowButtons">
-                <div class="calc-num-button">
+                <div class="calc-button">
                   <button
                     fxFlex
                     type="button"
                     mat-raised-button
                     [id]="button.word"
-                    (click)="enterNumber(button.num)"
+                    (click)="enterNumber(button.value)"
                   >
-                    {{ button.num }}
+                    {{ button.value }}
                   </button>
                 </div>
               </ng-container>
@@ -35,7 +35,16 @@ import { CALC_BUTTONS } from './calc-buttons';
           </ng-container>
         </div>
         <div fxFlex="30" fxFlex.lt-md="20">
-          ACTIONS
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            class="calc-row"
+          >
+            <div class="calc-button">
+              <button fxFlex type="button" mat-raised-button id=""></button>
+            </div>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -48,14 +57,15 @@ import { CALC_BUTTONS } from './calc-buttons';
     `,
     `
       .calc-row {
-        height: 25vh;
+        height: 20vh;
       }
     `,
     `
-      .calc-num-button {
+      .calc-button {
         height: 100%;
         width: 33%;
         padding: 0.5rem;
+        font-size: 2rem;
       }
     `
   ],

@@ -3,44 +3,58 @@ import { CalcButton } from './calc-button';
 export const CALC_BUTTONS: Array<Array<CalcButton>> = [
   [
     {
-      num: 7,
+      value: 7,
       word: 'seven'
     },
     {
-      num: 8,
+      value: 8,
       word: 'eight'
     },
     {
-      num: 9,
+      value: 9,
       word: 'nine'
     }
   ],
   [
     {
-      num: 4,
+      value: 4,
       word: 'four'
     },
     {
-      num: 5,
+      value: 5,
       word: 'five'
     },
     {
-      num: 6,
+      value: 6,
       word: 'six'
     }
   ],
   [
     {
-      num: 1,
+      value: 1,
       word: 'one'
     },
     {
-      num: 2,
+      value: 2,
       word: 'two'
     },
     {
-      num: 3,
+      value: 3,
       word: 'three'
+    }
+  ],
+  [
+    {
+      value: 'C',
+      word: 'clear'
+    },
+    {
+      value: 0,
+      word: 'zero'
+    },
+    {
+      value: '.',
+      word: 'decimal'
     }
   ]
 ];

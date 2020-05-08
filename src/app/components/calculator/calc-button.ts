@@ -1,4 +1,4 @@
 export interface CalcButton {
-  num: number;
+  value: number | string;
   word: string;
 }
