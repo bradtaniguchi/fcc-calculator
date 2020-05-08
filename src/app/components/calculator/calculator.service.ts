@@ -46,9 +46,9 @@ export class CalculatorService {
    * Gets the current value, evaluates it, then updates the string value
    */
   public equals() {
-    this.displayValue$.pipe(take(1)).subscribe((value) => {
-      this.update(this.eval(value));
-    });
+    this.displayValue$
+      .pipe(take(1))
+      .subscribe((value) => this._displayValue$.next('' + this.eval(value)));
   }
 
   public clear() {

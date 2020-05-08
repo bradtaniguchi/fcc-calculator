@@ -2,6 +2,26 @@ import { CalculatorService } from './calculator.service';
 
 describe('CalculatorService', () => {
   const service = new CalculatorService();
+  beforeEach(() => {
+    // always clears between tests to "reset"
+    // the internal state.
+    service.clear();
+  });
+  test.todo('enter number adds number');
+  test.todo('times adds *');
+  test.todo('divide adds /');
+  test.todo('add adds +');
+  test.todo('subtract adds-');
+  describe('equals', () => {
+    test.todo('evaluates display value');
+    test.todo('evaluates 0 to 0');
+    test.todo('evaluates empty string to empty string');
+    test.todo('only last duplicate operator is used, but not cleared');
+  });
+  describe('enterDecimal', () => {
+    test.todo('enterDecimal adds decimal');
+    test.todo('enterDecimal does not add decimal');
+  });
   describe('removeLeadingZeroes', () => {
     const testRemoveLeadingZeroes = ({
       value,
