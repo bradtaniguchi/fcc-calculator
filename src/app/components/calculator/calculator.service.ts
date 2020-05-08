@@ -6,9 +6,10 @@ import { take, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CalculatorService {
+  private readonly OPERATORS = ['x', '+', '-', '/'];
   private _displayValue$ = new BehaviorSubject<string>('');
   public displayValue$ = this._displayValue$.pipe(
-    map(this.removeLeadingZeroes),
+    map(this.removeLeadingZeroes.bind(this)),
     tap(console.log)
   );
   constructor() {}
@@ -22,9 +23,17 @@ export class CalculatorService {
    * Removes leading zeroes
    */
   private removeLeadingZeroes(value: string): string {
-    const chars = value.split('');
+    const chars = value.toLocaleLowerCase().split('');
     const indexOfNum = chars.findIndex((char) => char !== '0');
-    return chars.slice(0, indexOfNum).join('');
+    if (indexOfNum === 0) {
+      return chars.join('');
+    }
+    const nextIsOperator =
+      chars.length === 2 && this.OPERATORS.includes(chars[1]);
+    if (nextIsOperator) {
+      return chars.join('');
+    }
+    return chars.slice(indexOfNum, chars.length).join('');
   }
   /**
    * Evaluates the value using `eval` which is somewhat dangerous, but
