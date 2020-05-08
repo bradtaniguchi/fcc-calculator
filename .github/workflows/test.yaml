@@ -1,0 +1,21 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: use node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.8
+      - name: install deps
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run test
+      # TODO: add e2e tests
+      - name: build
+        run: npm run build -- --configuration=production
