@@ -67,6 +67,60 @@ describe('CalculatorService', () => {
       beforeFn: () => service.subtract(),
       expected: '32-'
     }));
+  describe('removeDupOperators', () => {
+    const testRemoveDupOperators = ({
+      value,
+      expected
+    }: {
+      value: string;
+      expected: string;
+    }) => expect((service as any).removeDupOperators(value)).toEqual(expected);
+    test('does not change single operator', () =>
+      testRemoveDupOperators({
+        value: '1+1',
+        expected: '1+1'
+      }));
+    test('does not change multiple single operators', () =>
+      testRemoveDupOperators({
+        value: '1+1+2',
+        expected: '1+1+2'
+      }));
+    test('removes duplicate operators', () =>
+      testRemoveDupOperators({
+        value: '5+*7',
+        expected: '5*7'
+      }));
+    test('removes multiple duplicate operators', () =>
+      testRemoveDupOperators({
+        value: '5+*7+*7+*7',
+        expected: '5*7*7*7'
+      }));
+    test('removes multiple stacked duplicate operators', () =>
+      testRemoveDupOperators({
+        value: '5+++++*7',
+        expected: '5*7'
+      }));
+    test('does not consider the last - operator to be a duplicate', () =>
+      testRemoveDupOperators({
+        value: '5+*-7',
+        expected: '5*-7'
+      }));
+    test('does not consider the last - operator to be a duplicate among many', () =>
+      testRemoveDupOperators({
+        value: '5+*-7+*-7',
+        expected: '5*-7*-7'
+      }));
+    test('does not consider multiple last - operators to be duplicates', () =>
+      testRemoveDupOperators({
+        value: '5+*---7',
+        expected: '5--7'
+      }));
+    test('does consider multiple duplicate - operators to be duplicates', () =>
+      testRemoveDupOperators({
+        value: '5----7---7',
+        expected: '5--7--7'
+      }));
+  });
   describe('equals', () => {
     test('evaluates display value', (done) =>
       testDisplayValue({
@@ -89,16 +143,20 @@ describe('CalculatorService', () => {
         beforeFn: () => service.equals(),
         expected: ''
       }));
-    test.skip('only last duplicate non minus operator is used, but not cleared', (done) =>
+    test('only last duplicate non minus operator is used, but not cleared', (done) =>
       testDisplayValue({
         done,
         startValue: '10-+10',
         beforeFn: () => service.equals(),
-        expected: '10'
+        expected: '20'
       }));
-    test.todo(
-      'if there are duplicate operators, and the last one is minus its ignored'
-    );
+    test('if there are duplicate operators, but with the last negative', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '10+-10',
+        beforeFn: () => service.equals(),
+        expected: '0'
+      }));
   });
   describe('enterDecimal', () => {
     test.todo('enterDecimal adds decimal');

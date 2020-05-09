@@ -6,7 +6,7 @@ import { filter, map, take, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CalculatorService {
-  private readonly OPERATORS = ['x', '+', '-', '/'];
+  private readonly OPERATORS = ['*', '+', '-', '/'];
   private _displayValue$ = new BehaviorSubject<string>('');
   public displayValue$: Observable<string> = this._displayValue$.pipe(
     map(this.removeLeadingZeroes.bind(this))
@@ -43,6 +43,43 @@ export class CalculatorService {
     return eval(value);
   }
   /**
+   * Removes duplicate operators so only the last
+   * operator is used. Except if the last operator is a `-` sign,
+   * then this is not considered.
+   */
+  private removeDupOperators(value: string): string {
+    return value
+      .split('')
+      .filter((char, index, chars) => {
+        if (!this.OPERATORS.includes(char)) {
+          return true;
+        }
+        const nextChar = chars[index + 1];
+        if (nextChar === undefined) {
+          // we are at the end of the string
+          return true;
+        }
+        const isDupOperator = this.OPERATORS.includes(nextChar);
+        if (isDupOperator && nextChar === '-') {
+          // if the next operator is '-', the value could be negative,
+          // so we can let it.
+
+          // unless the **next next** operator is also a negative, then
+          // this is a duplicate and don't add it.
+          const isNextNextMinus = chars[index + 2] === '-';
+          if (isNextNextMinus) {
+            return false;
+          }
+          return true;
+        }
+        if (isDupOperator) {
+          return false;
+        }
+        return true;
+      })
+      .join('');
+  }
+  /**
    * Gets the current value, evaluates it, then updates the string value
    */
   public equals() {
@@ -50,6 +87,7 @@ export class CalculatorService {
       .pipe(
         take(1),
         filter((_) => !!_),
+        map((value) => this.removeDupOperators(value)),
         tap((val) => console.log('>> ', val))
       )
       .subscribe((value) => this._displayValue$.next('' + this.eval(value)));
