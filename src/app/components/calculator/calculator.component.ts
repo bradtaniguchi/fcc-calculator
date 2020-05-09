@@ -18,7 +18,7 @@ import { CalcButton } from './calc-button';
       </div>
       <div fxLayout="row" style="height: 100%">
         <!-- number buttons -->
-        <div fxFlex="70" fxFlex.lt-md="80" fxLayout="column">
+        <div fxFlex="70" fxLayout="column">
           <ng-container *ngFor="let rowButtons of calcButtons">
             <div
               fxLayout="row"
@@ -42,7 +42,7 @@ import { CalcButton } from './calc-button';
             </div>
           </ng-container>
         </div>
-        <div fxFlex="30" fxFlex.lt-md="20">
+        <div fxFlex="30">
           <div fxLayout="row" fxLayoutAlign="center" class="calc-row">
             <div class="calc-action">
               <button
