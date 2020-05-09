@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +49,8 @@ export class CalculatorService {
     this.displayValue$
       .pipe(
         take(1),
-        filter((_) => !!_)
+        filter((_) => !!_),
+        tap((val) => console.log('>> ', val))
       )
       .subscribe((value) => this._displayValue$.next('' + this.eval(value)));
   }

@@ -68,10 +68,37 @@ describe('CalculatorService', () => {
       expected: '32-'
     }));
   describe('equals', () => {
-    test.todo('evaluates display value');
-    test.todo('evaluates 0 to 0');
-    test.todo('evaluates empty string to empty string');
-    test.todo('only last duplicate operator is used, but not cleared');
+    test('evaluates display value', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '42 + 10',
+        beforeFn: () => service.equals(),
+        expected: '52'
+      }));
+    test('evaluates 0 to 0', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '0',
+        beforeFn: () => service.equals(),
+        expected: '0'
+      }));
+    test('evaluates empty string to empty string', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '',
+        beforeFn: () => service.equals(),
+        expected: ''
+      }));
+    test.skip('only last duplicate non minus operator is used, but not cleared', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '10-+10',
+        beforeFn: () => service.equals(),
+        expected: '10'
+      }));
+    test.todo(
+      'if there are duplicate operators, and the last one is minus its ignored'
+    );
   });
   describe('enterDecimal', () => {
     test.todo('enterDecimal adds decimal');
