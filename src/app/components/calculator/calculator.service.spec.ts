@@ -53,8 +53,20 @@ describe('CalculatorService', () => {
       beforeFn: () => service.divide(),
       expected: '3/'
     }));
-  test.todo('add adds +');
-  test.todo('subtract adds-');
+  test('add adds +', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '32',
+      beforeFn: () => service.add(),
+      expected: '32+'
+    }));
+  test('subtract adds -', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '32',
+      beforeFn: () => service.subtract(),
+      expected: '32-'
+    }));
   describe('equals', () => {
     test.todo('evaluates display value');
     test.todo('evaluates 0 to 0');
