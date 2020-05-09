@@ -1,11 +1,13 @@
-name: CI
+name: test on commit
 on:
   push:
     tags-ignore:
-      - '*'
+      - "*"
   pull_request:
+    branches:
+      - master
     tags-ignore:
-      - '*'
+      - "*"
 
 jobs:
   test-on-commit:
