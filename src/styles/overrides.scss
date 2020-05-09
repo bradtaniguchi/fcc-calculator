@@ -1,3 +1,9 @@
+// Increase button font
 .mat-button-wrapper {
   font-size: 24px;
+}
+
+// Makes buttons flat
+button.mat-raised-button {
+  border-radius: 0px;
 }

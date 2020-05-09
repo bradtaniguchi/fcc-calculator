@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CALC_BUTTONS } from './calc-buttons';
 import { CalculatorService } from './calculator.service';
+import { CalcButton } from './calc-button';
 
 @Component({
   selector: 'calc-calculator',
@@ -25,12 +26,13 @@ import { CalculatorService } from './calculator.service';
               class="calc-row"
             >
               <ng-container *ngFor="let button of rowButtons">
-                <div class="calc-button">
+                <div class="calc-button" fxFlex>
                   <button
                     fxFlex
                     type="button"
                     mat-raised-button
                     [id]="button.word"
+                    [color]="getColor(button)"
                     (click)="enterNumber(button.value)"
                   >
                     {{ button.value }}
@@ -96,6 +98,7 @@ import { CalculatorService } from './calculator.service';
                 fxFlex
                 type="button"
                 mat-raised-button
+                color="primary"
                 id="equals"
                 (click)="equals()"
               >
@@ -123,15 +126,12 @@ import { CalculatorService } from './calculator.service';
     `
       .calc-button {
         height: 100%;
-        width: 33%;
-        padding: 0.5rem;
         font-size: 2rem;
       }
     `,
     `
       .calc-action {
         width: 100%;
-        padding: 0.5rem;
       }
     `,
     `
@@ -151,7 +151,9 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
     this.displayValue$ = this.calculator.displayValue$;
   }
-
+  public getColor(button: CalcButton) {
+    return button.word === 'clear' ? 'primary' : '';
+  }
   public enterNumber(num: number | '.' | 'C') {
     if (num === 'C') {
       return this.clear();
