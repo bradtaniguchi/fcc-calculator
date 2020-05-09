@@ -159,8 +159,27 @@ describe('CalculatorService', () => {
       }));
   });
   describe('enterDecimal', () => {
-    test.todo('enterDecimal adds decimal');
-    test.todo('enterDecimal does not add decimal');
+    test('enterDecimal adds decimal', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '10',
+        beforeFn: () => service.enterDecimal(),
+        expected: '10.'
+      }));
+    test('enterDecimal does not add repeating decimal', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '10.',
+        beforeFn: () => service.enterDecimal(),
+        expected: '10.'
+      }));
+    test('enterDecimal does not add extra decimals in other numbers', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '10.0 + 10.',
+        beforeFn: () => service.enterDecimal(),
+        expected: '10.0 + 10.'
+      }));
   });
   describe('removeLeadingZeroes', () => {
     const testRemoveLeadingZeroes = ({

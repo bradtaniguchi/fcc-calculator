@@ -100,9 +100,30 @@ export class CalculatorService {
   public enterNumber(num: number) {
     this.update(num);
   }
+  /**
+   * User's can only enter a decimal if there isn't already
+   * a decimal point in the "last number".
+   */
+  private canEnterDecimal(value: string): boolean {
+    const matches = /[\d|.]+$/.exec(value);
+    if (!matches) {
+      return true;
+    }
+    const [lastNumber] = matches;
+    if (lastNumber == undefined) {
+      return true;
+    }
+    const hasDecimalAlready = lastNumber.includes('.');
+    if (hasDecimalAlready) {
+      return false;
+    }
+    return true;
+  }
 
   public enterDecimal() {
-    this.update('.');
+    if (this.canEnterDecimal(this._displayValue$.value)) {
+      this.update('.');
+    }
   }
 
   public times() {
