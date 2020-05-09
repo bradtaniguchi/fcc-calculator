@@ -1,4 +1,6 @@
 import { CalculatorService } from './calculator.service';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 describe('CalculatorService', () => {
   const service = new CalculatorService();
@@ -7,9 +9,50 @@ describe('CalculatorService', () => {
     // the internal state.
     service.clear();
   });
-  test.todo('enter number adds number');
-  test.todo('times adds *');
-  test.todo('divide adds /');
+  const testDisplayValue = ({
+    done,
+    startValue,
+    beforeFn,
+    expected
+  }: {
+    done: jest.DoneCallback;
+    startValue: string;
+    beforeFn: () => any;
+    expected: string;
+  }) => {
+    // run the before code
+    // tests the displayValue
+    ((service as any)._displayValue$ as BehaviorSubject<string>).next(
+      startValue
+    );
+    beforeFn();
+    // now check
+    service.displayValue$.pipe(take(1)).subscribe((finalValue) => {
+      expect(finalValue).toEqual(expected);
+      done();
+    });
+  };
+  test('enter number adds number', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '1+',
+      beforeFn: () => service.enterNumber(1),
+      expected: '1+1'
+    }));
+  test('times adds *', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '10',
+      beforeFn: () => service.times(),
+      expected: '10*'
+    }));
+  test('divide adds /', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '3',
+      beforeFn: () => service.divide(),
+      expected: '3/'
+    }));
   test.todo('add adds +');
   test.todo('subtract adds-');
   describe('equals', () => {
