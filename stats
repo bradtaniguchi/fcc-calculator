@@ -1,0 +1,4 @@
+{
+  "sha": "46adcb2bbc421dab95ea2c2950d9b44a4c019767",
+  "tag": "${GITHUB_REF##*/}"
+}
