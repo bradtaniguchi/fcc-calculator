@@ -1,4 +1,4 @@
 {
-  "sha": "46adcb2bbc421dab95ea2c2950d9b44a4c019767",
-  "tag": "${GITHUB_REF##*/}"
+  "sha": "b61f8721a63e81a0f2841f63a1761bd8a0e740b5",
+  "tag": "refs/tags/v0.0.7"
 }
