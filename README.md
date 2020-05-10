@@ -1,6 +1,6 @@
 # FccCalculator
 
-![CI](https://github.com/bradtaniguchi/fcc-calculator/workflows/CI/badge.svg?branch=master&event=push)
+![CI](https://github.com/bradtaniguchi/fcc-calculator/workflows/CI/badge.svg?branch=master&event=push) ![issues](https://img.shields.io/github/issues/bradtaniguchi/fcc-calculator?style=plastic) ![tag](https://img.shields.io/github/v/tag/bradtaniguchi/fcc-calculator)
 
 This project used [Angular](https://angular.io/)
 
