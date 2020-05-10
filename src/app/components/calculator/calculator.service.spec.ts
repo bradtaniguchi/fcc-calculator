@@ -32,6 +32,13 @@ describe('CalculatorService', () => {
       done();
     });
   };
+  test('backspace removes last character', (done) =>
+    testDisplayValue({
+      done,
+      startValue: '1+1',
+      beforeFn: () => service.backspace(),
+      expected: '1+'
+    }));
   test('enter number adds number', (done) =>
     testDisplayValue({
       done,
