@@ -1,57 +1,65 @@
-describe("calculator", () => {
-  describe("element exist", () => {
-    it("equals");
+describe('calculator', () => {
+  before(() => {
+    cy.visit('');
+  });
+  describe('element exist', () => {
+    it('false test', () => {
+      expect(cy.get('#nope').should('not.exist'));
+    });
+    it('equals', () => {
+      expect(cy.get('#equals')).exist;
+    });
     // copy of the button definitions
     // used to display in the calculator.
     const mainButtons = [
       {
         value: 7,
-        word: "seven",
+        word: 'seven'
       },
       {
         value: 8,
-        word: "eight",
+        word: 'eight'
       },
       {
         value: 9,
-        word: "nine",
+        word: 'nine'
       },
       {
         value: 4,
-        word: "four",
+        word: 'four'
       },
       {
         value: 5,
-        word: "five",
+        word: 'five'
       },
       {
         value: 6,
-        word: "six",
+        word: 'six'
       },
       {
         value: 1,
-        word: "one",
+        word: 'one'
       },
       {
         value: 2,
-        word: "two",
+        word: 'two'
       },
       {
         value: 3,
-        word: "three",
+        word: 'three'
       },
       {
-        value: "C",
-        word: "clear",
+        value: 'C',
+        word: 'clear'
       },
       {
         value: 0,
-        word: "zero",
+        word: 'zero'
       },
       {
-        value: ".",
-        word: "decimal",
-      },
+        value: '.',
+        word: 'decimal'
+      }
     ];
     mainButtons.forEach((mainButton) => {
       // make sure every single one exists

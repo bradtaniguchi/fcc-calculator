@@ -121,7 +121,12 @@
           "options": {
             "cypressConfig": "e2e/cypress.json",
             "tsConfig": "e2e/tsconfig.e2e.json",
-	    "devServerTarget": "fcc-calculator:serve"
+            "devServerTarget": "fcc-calculator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fcc-calculator:serve:production"
+            }
           }
         }
       }
