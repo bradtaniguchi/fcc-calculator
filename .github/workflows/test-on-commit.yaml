@@ -32,4 +32,4 @@ jobs:
       - name: build:stats
         run: npm run build:stats
         env:
-          TAG: ${GITHUB_REF##*/}
+          TAG: ${{github.ref}}
