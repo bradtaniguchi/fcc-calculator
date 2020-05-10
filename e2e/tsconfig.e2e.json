@@ -5,6 +5,6 @@
         "outDir": "../../dist/out-tsc"
     },
     "include": [
-        "src/**/*.ts"
+        "./src/**/*.ts"
     ]
 }
