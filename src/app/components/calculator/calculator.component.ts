@@ -93,6 +93,22 @@ import { CalcButton } from './calc-button';
           </div>
           <div fxLayout="row" fxLayoutAlign="center" style="height: 40vh">
             <!-- TODO: add credits and settings -->
+            <div class="calc-action" fxLayout="column">
+              <button
+                fxFlex
+                type="button"
+                mat-raised-button
+                id="backspace"
+                (click)="backspace()"
+                fxLayout="column"
+                fxLayoutAlign="center center"
+              >
+                <mat-icon>
+                  keyboard_backspace
+                </mat-icon>
+              </button>
+              <div fxFlex></div>
+            </div>
             <div class="calc-action">
               <button
                 fxFlex
@@ -162,6 +178,10 @@ export class CalculatorComponent implements OnInit {
       return this.calculator.enterDecimal();
     }
     this.calculator.enterNumber(num);
+  }
+
+  public backspace() {
+    this.calculator.backspace();
   }
 
   public clear() {

@@ -93,6 +93,14 @@ export class CalculatorService {
       .subscribe((value) => this._displayValue$.next('' + this.eval(value)));
   }
 
+  public backspace() {
+    const value = this._displayValue$.value;
+    if (!value.length) {
+      return; // doesn't backspace from empty string
+    }
+    this._displayValue$.next(value.slice(0, value.length - 1));
+  }
+
   public clear() {
     this._displayValue$.next('');
   }

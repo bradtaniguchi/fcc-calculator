@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { CalculatorComponent } from './calculator.component';
 
 @NgModule({
@@ -11,7 +12,8 @@ import { CalculatorComponent } from './calculator.component';
 
     // Material
     FlexModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [CalculatorComponent]
 })
