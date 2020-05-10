@@ -2,12 +2,12 @@ name: test on commit
 on:
   push:
     tags-ignore:
-      - "*"
+      - '*'
   pull_request:
     branches:
       - master
     tags-ignore:
-      - "*"
+      - '*'
 
 jobs:
   test-on-commit:
@@ -27,3 +27,7 @@ jobs:
       # TODO: add e2e tests
       - name: build
         run: npm run build -- --configuration=production
+      - name: build:stats
+        run: npm run build:stats
+        env:
+          TAG: ${GITHUB_REF##*/}
