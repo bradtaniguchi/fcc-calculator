@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:stats": "ts-node --project=./tools/tsconfig.script.json ./tools/build-stats.ts"
+    "build:stats": "ts-node --project=./tools/tsconfig.script.json ./tools/build-stats.ts",
+    "clean": "npx rimraf dist"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,7 @@
     "eslint": "^6.8.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
     "ts-node": "~8.10.1",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
