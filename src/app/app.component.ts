@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'calc-root',
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
       <router-outlet></router-outlet>
     </main>
   `,
-  styles: []
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'fcc-calculator';
