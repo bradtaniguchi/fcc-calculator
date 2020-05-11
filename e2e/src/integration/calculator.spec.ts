@@ -71,14 +71,14 @@ describe('calculator', () => {
       expect(cy.get('#nope').should('not.exist'));
     });
 
-    mainButtons.forEach((mainButton) => {
-      // make sure every single one exists
-      it(mainButton.word, () => {
+    // make sure every single one exists
+    it('main buttons', () => {
+      mainButtons.forEach((mainButton) => {
         expect(cy.get(`#${mainButton.word}`)).exist;
       });
     });
-    actionButtons.forEach((id) => {
-      it(id, () => {
+    it('action buttons', () => {
+      actionButtons.forEach((id) => {
         expect(cy.get(`#${id}`)).exist;
       });
     });
@@ -103,7 +103,21 @@ describe('calculator', () => {
     cy.get('#equals').should('be.visible').click();
     cy.get('#display').should('have.text', ' 2 ');
   });
-  it('clear clears entered values (2/2)');
+  it('clear clears entered values (2/2)', () => {
+    cy.get('#display').should('be.visible').should('have.text', ' 0 ');
+
+    cy.get('#two').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 2 ');
+
+    cy.get('#divide').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 2/ ');
+
+    cy.get('#two').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 2/2 ');
+
+    cy.get('#clear').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 0 ');
+  });
   it('dividing by zero is recoverable');
   it('uses previous result after = ');
   it('has decimal places of precision');
