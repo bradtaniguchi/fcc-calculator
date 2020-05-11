@@ -29,6 +29,8 @@ jobs:
       # TODO: add e2e tests
       - name: build
         run: npm run build -- --configuration=production
+      - name: e2e
+        run: npm run e2e -- --headless
       - name: build:stats
         run: npm run build:stats
         env:
