@@ -24,6 +24,11 @@ jobs:
         run: npm run build -- --configuration=production
       - name: e2e
         run: npm run e2e -- --headless -c=production
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: fcc-calculator-e2e
+          path: ./dist/cypress/fcc-calculator-e2e/**
       - name: build:stats
         run: npm run build:stats
         env:
