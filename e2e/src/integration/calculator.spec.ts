@@ -2,6 +2,9 @@ describe('calculator', () => {
   before(() => {
     cy.visit('');
   });
+  afterEach(() => {
+    cy.reload();
+  });
   // copy of the button definitions
   // used to display in the calculator.
   const mainButtons = [
@@ -80,9 +83,27 @@ describe('calculator', () => {
       });
     });
   });
-  it('clear does nothing initially');
-  it('clear clears entered values');
-  it('equals adds the values');
+  it('clear does nothing initially', () => {
+    cy.get('#display').should('be.visible').should('have.text', ' 0 ');
+    cy.get('#equals').should('be.visible').click();
+    cy.get('#display').should('be.visible').should('have.text', ' 0 ');
+  });
+  it('1+1 equals 2', () => {
+    cy.get('#display').should('be.visible').should('have.text', ' 0 ');
+
+    cy.get('#one').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 1 ');
+
+    cy.get('#add').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 1+ ');
+
+    cy.get('#one').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 1+1 ');
+
+    cy.get('#equals').should('be.visible').click();
+    cy.get('#display').should('have.text', ' 2 ');
+  });
+  it('clear clears entered values (2/2)');
   it('dividing by zero is recoverable');
   it('uses previous result after = ');
   it('has decimal places of precision');
