@@ -4,17 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculatorModule } from './components/calculator/calculator.module';
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-
-    CalculatorModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CalculatorModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

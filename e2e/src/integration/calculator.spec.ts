@@ -101,4 +101,5 @@ describe('calculator', () => {
   it('dividing by zero is recoverable');
   it('uses previous result after = ');
   it('has decimal places of precision');
+  it('accepts keyboard inputs');
 });
