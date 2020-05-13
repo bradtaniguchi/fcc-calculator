@@ -5,6 +5,8 @@
 A web app calculator that uses [github pages](https://pages.github.com/)
 Check it out [here](https://bradtaniguchi.github.io/fcc-calculator). Built for the [FreeCodeCamp](https://www.freecodecamp.org/) challenge [build a JavaScript Calculator](https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-javascript-calculator).
 
+![example screenshot](../media/app.png)
+
 ## Built With
 
 This project uses [Angular](https://angular.io/) and the following component libs:
