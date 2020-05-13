@@ -98,6 +98,17 @@ describe('calculator', () => {
       .click();
     calculatorPageObject.getDisplay().should('have.text', ' 0 ');
   });
+  it('accepts keyboard inputs', () => {
+    calculatorPageObject
+      .getDisplay()
+      .should('be.visible')
+      .should('have.text', ' 0 ');
+
+    cy.get('body').type('2*4=');
+    calculatorPageObject.getDisplay().should('have.text', ' 8 ');
+    cy.get('body').type('c');
+    calculatorPageObject.getDisplay().should('have.text', ' 0 ');
+  });
   it('dividing by zero is recoverable');
   it('uses previous result after = ');
   it('has decimal places of precision');

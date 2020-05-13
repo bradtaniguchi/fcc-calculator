@@ -4,6 +4,7 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CalculatorComponent } from './calculator.component';
+import { PageInputService } from './page-input.service';
 
 @NgModule({
   declarations: [CalculatorComponent],
@@ -17,4 +18,7 @@ import { CalculatorComponent } from './calculator.component';
   ],
   exports: [CalculatorComponent]
 })
-export class CalculatorModule {}
+export class CalculatorModule {
+  // this is injected so it can start "watching" for page inputs
+  constructor(private pageInput: PageInputService) {}
+}
