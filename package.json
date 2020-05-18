@@ -45,7 +45,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
-    "@typescript-eslint/typescript-estree": "^2.33.0",
+    "@typescript-eslint/typescript-estree": "^2.34.0",
     "angular-cli-ghpages": "^0.6.2",
     "cypress": "^4.5.0",
     "eslint": "^6.8.0",
