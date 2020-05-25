@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/bradtaniguchi/fcc-calculator) 
+
 # FccCalculator
 
 ![CI](https://github.com/bradtaniguchi/fcc-calculator/workflows/CI/badge.svg?branch=master&event=push) ![issues](https://img.shields.io/github/issues/bradtaniguchi/fcc-calculator?style=plastic) ![tag](https://img.shields.io/github/v/tag/bradtaniguchi/fcc-calculator)
