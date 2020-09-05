@@ -109,6 +109,17 @@ describe('calculator', () => {
     cy.get('body').type('c');
     calculatorPageObject.getDisplay().should('have.text', ' 0 ');
   });
+  it('only last non minus operator is considered', () => {
+    calculatorPageObject
+      .getDisplay()
+      .should('be.visible')
+      .should('have.text', ' 0 ');
+
+    cy.get('body').type('2-+2=');
+    calculatorPageObject.getDisplay().should('have.text', ' 4 ');
+    cy.get('body').type('c');
+    calculatorPageObject.getDisplay().should('have.text', ' 0 ');
+  });
   it('dividing by zero is recoverable');
   it('uses previous result after = ');
   it('has decimal places of precision');

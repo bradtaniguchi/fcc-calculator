@@ -107,6 +107,11 @@ describe('CalculatorService', () => {
         value: '5+++++*7',
         expected: '5*7'
       }));
+    test('removes multiple stacked different operators (5*-+5)', () =>
+      testRemoveDupOperators({
+        value: '5*-+5',
+        expected: '5+5'
+      }));
     test('does not consider the last - operator to be a duplicate', () =>
       testRemoveDupOperators({
         value: '5+*-7',
@@ -163,6 +168,13 @@ describe('CalculatorService', () => {
         startValue: '10+-10',
         beforeFn: () => service.equals(),
         expected: '0'
+      }));
+    test('deals with multiple duplicate operators, uses last operator', (done) =>
+      testDisplayValue({
+        done,
+        startValue: '5*-+5',
+        beforeFn: () => service.equals(),
+        expected: '10'
       }));
   });
   describe('enterDecimal', () => {

@@ -46,12 +46,17 @@ export class CalculatorService {
    * Removes duplicate operators so only the last
    * operator is used. Except if the last operator is a `-` sign,
    * then this is not considered.
+   *
+   * Currently failing with the following test case:
+   * Expected: "5+5"
+   * Received: "5*+5"
    */
   private removeDupOperators(value: string): string {
     return value
       .split('')
       .filter((char, index, chars) => {
         if (!this.OPERATORS.includes(char)) {
+          // if this character is not an operator, just return
           return true;
         }
         const nextChar = chars[index + 1];
@@ -64,10 +69,10 @@ export class CalculatorService {
           // if the next operator is '-', the value could be negative,
           // so we can let it.
 
-          // unless the **next next** operator is also a negative, then
-          // this is a duplicate and don't add it.
-          const isNextNextMinus = chars[index + 2] === '-';
-          if (isNextNextMinus) {
+          // if the next NEXT character is an operator, then don't include
+          // the current operator.
+          const hasNextNextOperator = this.OPERATORS.includes(chars[index + 2]);
+          if (hasNextNextOperator) {
             return false;
           }
           return true;
