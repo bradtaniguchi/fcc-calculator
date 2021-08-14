@@ -1,5 +1,5 @@
 {
   "ci": {
-    "collect": { "staticDistDir": "./dist/static" }
+    "collect": { "staticDistDir": "./dist/fcc-calculator" }
   }
 }
