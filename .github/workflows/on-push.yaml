@@ -1,0 +1,70 @@
+name: on-push
+on:
+  # run on push, but not on tag release
+  push:
+    branches:
+      - '**'
+
+jobs:
+  core-pipeline:
+    name: Core pipeline
+    timeout-minutes: 10
+    runs-on: ubuntu-18.04
+    steps:
+     - name: checkout repo
+        uses: actions/checkout@v2
+        with:
+          # get lfs items
+          lfs: true
+          # fetch all commits, slower but required to pass to nx
+          fetch-depth: 0
+
+      - name: setup node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.3'
+          cache: 'npm'
+
+      - name: install deps
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
+
+      # TODO: add e2e tests
+      - name: build
+        run: npm run build -- --configuration=production
+
+      - name: e2e
+        run: npm run e2e -- --headless
+
+      - name: upload e2e failed artifacts
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: fcc-calculator-e2e
+          path: ./dist/cypress/fcc-calculator-e2e/**
+
+      - name: build:stats
+        run: npm run build:stats
+        env:
+          TAG: ${{github.ref}}
+
+      - name: run-lighthouse-ci
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          configPath: ./lighthouserc.json
+          budgetPath: ./lighthouse-budget.json
+          temporaryPublicStorage: true
+          uploadArtifacts: true
+
+      - name: deploy-to-ghpages
+        # only execute if on main branch, and not PR
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/fcc-calculator
